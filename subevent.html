@@ -1,0 +1,487 @@
+<html>
+    <head>
+            <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+            <link rel="stylesheet" type="text/css" href="css/main.css">
+            <title>sub_event</title>
+            <style>
+body, html {
+    height: 100%;
+}
+
+.bg { 
+    /* The image used */
+    background-image: url("images/event_background.png");
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.event_detail{
+        background-image: url("images/mainbackground.png");
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover; 
+    }
+
+    .dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
+
+.container {width: 960px; margin: 0 auto; overflow: hidden;}
+
+#content {	float: left; width: 100%;}
+
+.post { margin: 0 auto; padding-bottom: 50px; float: left; width: 960px; }
+
+.btn-sign {
+	width:460px;
+	margin-bottom:20px;
+	margin:0 auto;
+	padding:20px;
+	border-radius:5px;
+	background: -moz-linear-gradient(center top, #00c6ff, #018eb6);
+    background: -webkit-gradient(linear, left top, left bottom, from(#00c6ff), to(#018eb6));
+	background:  -o-linear-gradient(top, #00c6ff, #018eb6);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#00c6ff', EndColorStr='#018eb6');
+	text-align:center;
+	font-size:36px;
+	color:#fff;
+	text-transform:uppercase;
+}
+
+.btn-sign a { color:#fff; text-shadow:0 1px 2px #161616; }
+
+#mask {
+	display: none;
+	background: #000; 
+	position: fixed; left: 0; top: 0; 
+	z-index: 10;
+	width: 100%; height: 100%;
+	opacity: 0.8;
+	z-index: 999;
+}
+
+.login-popup{
+	display:none;
+	background: white;
+	padding: 10px; 
+	float: left;
+	font-size: 1.2em;
+	position: fixed;
+	top: 50%; left: 50%;
+	z-index: 99999;
+	
+	border-radius:10px 10px 10px 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px; 
+    height: 50%;
+    overflow-x: hidden;
+overflow-y:visible;
+}
+
+img.btn_close {
+	float: right; 
+	margin: -28px -28px 0 0;
+}
+
+fieldset { 
+	border:none; 
+}
+
+form.signin .textbox label { 
+	display:block; 
+	padding-bottom:7px; 
+}
+
+form.signin .textbox span { 
+	display:block;
+}
+
+form.signin p, form.signin span { 
+	color:black; 
+	font-size:11px; 
+	line-height:18px;
+} 
+
+form.signin .textbox input { 
+	background:#d0d1ce; 
+	border-bottom:1px solid#d0d1ce;
+	border-left:1px solid #d0d1ce;
+	border-right:1px solid #d0d1ce;
+	border-top:1px solid #d0d1ce;
+	color:black; 
+	border-radius: 3px 3px 3px 3px;
+	-moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+	font:13px Arial, Helvetica, sans-serif;
+	padding:6px 6px 4px;
+    width:200px;
+   
+   
+}
+
+form.signin input:-moz-placeholder { color:#bbb; text-shadow:0 0 2px #000; }
+form.signin input::-webkit-input-placeholder { color:#bbb; text-shadow:0 0 2px #000;  }
+
+
+</style>
+
+        <script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous">
+        </script>
+      
+      <script type="text/javascript">
+        $(document).ready(function() {
+        $('a.login-window').click(function() {
+            
+            // Getting the variable's value from a link 
+            var loginBox = $(this).attr('href');
+        
+            //Fade in the Popup and add close button
+            $(loginBox).fadeIn(300);
+            
+            //Set the center alignment padding + border
+            var popMargTop = ($(loginBox).height() + 24) / 2; 
+            var popMargLeft = ($(loginBox).width() + 24) / 2; 
+            
+            $(loginBox).css({ 
+                'margin-top' : -popMargTop,
+                'margin-left' : -popMargLeft
+            });
+            
+            // Add the mask to body
+            $('body').append('<div id="mask"></div>');
+            $('#mask').fadeIn(300);
+            
+            return false;
+        });
+        
+        // When clicking on the button close or the mask layer the popup closed
+        $('a.close, #mask').live('click', function() { 
+          $('#mask , .login-popup').fadeOut(300 , function() {
+            $('#mask').remove();  
+        }); 
+        return false;
+        });
+        });
+        </script>
+
+    </head>
+
+    <body>
+            
+    <div class="bg">
+    <a href="#login-box" class="login-window"><button class="ui violet button"  id="register_button" style="position:relative;right:6.7em;top: 44em;left:79em;display:block;"> สมัครลงเเข่ง</button></a>
+            
+    <div class="Activity_images">
+    <img id="image_1" src="images/1.png" width="31%">
+    <img id="image_2" src="images/2.png" width="29%"> 
+    <img id="image_3" src="images/3.png" width="27%">   
+    <img id="image_4" src="images/4.png" width="20%">
+
+    </div>
+
+    <div class="contact_images">
+    <img id="ct_facebook" src="images/ct_facebook.png  " width="4%" ><br><h1>facebook</h1>
+    <img id="ct_line" src="images/ct_line.png  " width="4.8%">
+    <img id="ct_phone" src="images/ct_phone.png" width="4.1%">
+
+
+    </div>
+
+    
+
+
+    </div>
+
+    <div class="event_detail">
+        <div class="menu-top">
+                <img src="images\Kmutt web prototype2-27.png " height="58" width="42" style="position:fixed;right:1.5em;top:49em;left:90em;display:block;position:absolute"/>
+                <img src="images\Kmutt web prototype2-26.png" style=" width:6%;position:relative;right:5em;top:50em;left:80em;display:block;position:absolute" />
+                <img src="images\Kmutt web prototype2-30.png" style=" width:6%;position:relative;right:5em;top:50em;left:73em;display:block;position:absolute" />
+        
+                <div class="box-status">
+
+                <button id="status" class="ui inverted button">สถานะการเเข่งขันน</button>
+            
+             
+        </div>
+ 
+        
+
+        <div class="profile-box">
+            <h5 id="mainpic-h5">LALA move open</h5>
+            <img src="images/mainpic.png" class="mainpic"/>
+            <button id="detail-button" class="ui green button">รายละเอียดการเเข่ง</button>
+
+            <div id="account-detail">
+                <p>detail</p>
+                <p>detail</p>
+                <p>detail</p>
+                <p>detail</p>
+               
+            </div>
+        </div>
+ 
+        <div class="dropdown">
+                <button class="dropbtn">เลือกอันดับมือ</button>
+                <div class="dropdown-content">
+                  <a href="#">Link 1</a>
+                  <a href="#">Link 2</a>
+                  <a href="#">Link 3</a>
+                </div>
+              </div>
+
+        <div class="ui mobile reversed equal width grid" id="status-cha">
+                
+                <div class="column">
+                    <button class="ui inverted blue button" id="box_1">สถานะรายการ</button>
+                </div>
+                <div class="column">
+                    <button class="ui inverted blue button" id="box_2" > สถานะประเมิน</button>
+                </div>
+                <div class="column">
+                    <button class="ui inverted blue button"id="box_3">สถานะการเงิน</button>
+                </div>
+                <div class="column">
+                    <button class="ui inverted blue button" id="box_4">ภาพรวม</button>
+                </div>
+              </div>
+              <div class="infomation-scroll">
+                    <table class="scroll">
+                            <thead>
+                                <tr>
+                                    <th>Head 1</th>
+                                    <th>Head 2</th>
+                                    <th>Head 3</th>
+                                    <th>Head 4</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Content 1</td>
+                                    <td>Content 2</td>
+                                    <td>Content 3</td>
+                                    <td>Content 4</td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td>Content 1</td>
+                                    <td>Lorem ipsum dolor sit amet.</td>
+                                    <td>Content 3</td>
+                                    <td>Content 4</td>
+                                  
+                                </tr>
+                                <tr>
+                                    <td>Content 1</td>
+                                    <td>Content 2</td>
+                                    <td>Content 3</td>
+                                    <td>Content 4</td>
+                                   
+                                </tr>
+                                <tr>
+                                    <td>Content 1</td>
+                                    <td>Content 2</td>
+                                    <td>Content 3</td>
+                                    <td>Content 4</td>
+                                  
+                                </tr>
+                                <tr>
+                                        <td>Content 1</td>
+                                        <td>Content 2</td>
+                                        <td>Content 3</td>
+                                        <td>Content 4</td>
+                                      
+                                    </tr>
+                                    <tr>
+                                            <td>Content 1</td>
+                                            <td>Content 2</td>
+                                            <td>Content 3</td>
+                                            <td>Content 4</td>
+                                          
+                                        </tr>
+                               
+                                
+                            </tbody>
+                        </table>
+            </div>
+              
+           
+            </div>
+        </div>
+
+        
+      
+        </div>
+
+
+
+
+
+
+
+         
+   </div>
+
+   <div id="login-box" class="login-popup">
+       <!-- <a href="#" class="close"><img src="images\Kmutt web prototype2-29.png" class="btn_close" title="Close Window" alt="Close" width="20%" style="position:fixed;right:10.7em;top: 20.5em;left:6em;display:block;position:absolute"  /></a> -->
+          <form method="post" class="signin" action="#">
+                <fieldset class="textbox">
+                <label class="username">
+                <span>ชื่อ</span>
+                <input id="username" name="username" value="" type="text" autocomplete="on" >
+                </label>
+                
+                <label class="surname">
+                <span>นามสกุล</span>
+                <input id="surname" name="surname" value="" type="text" autocomplete="on" >
+                </label>
+
+                <label class="phone">
+                <span>เบอร์โทรศัพท์</span>
+                <input id="phone" name="phone" value="" type="text" autocomplete="on">
+                </label>
+
+                <label class="prize">
+                <span> เคยได้รางวัลที่เท่าไหร่</span>
+                <input id="prize" name="prize" value="" type="text" autocomplete="on" >
+                </label>
+
+                <label class="select-pic">
+                        <span> อัพโหลดภาพผู้เเข่งขัน(ถ้ามี)</span>
+                        <button class="ui blue button">เลือกรูป</button>
+                </label>
+
+                <label class="gender">
+                        <span>  เพศ</span>
+                        <button class="circular ui icon button left attached ">
+                                ชาย
+                              </button>
+                              
+                              <button class="circular ui icon button  right attached ">
+                              หญิง
+                              </button>
+
+                              <span>อายุ</span>
+                              <div class="ui input" style="width: 30px;">
+                                      <input type="text" />
+                              </div>
+
+                              <div class="ui selection dropdown" id="dropdown-ranked">
+                                    <input type="hidden" name="Ranked">
+                                    <i class="dropdown icon"></i>
+                                    <div class="menu">
+                                      <div class="item" data-value="1"></div>
+                                    </div>
+                                  </div>
+                </label>
+
+                <label class="username">
+                <span>ชื่อ</span>
+                <input id="username" name="username" value="" type="text" autocomplete="on" >
+                </label>
+                
+                <label class="surname">
+                <span>นามสกุล</span>
+                <input id="surname" name="surname" value="" type="text" autocomplete="on" >
+                </label>
+
+                <label class="phone">
+                <span>เบอร์โทรศัพท์</span>
+                <input id="phone" name="phone" value="" type="text" autocomplete="on">
+                </label>
+
+                <label class="prize">
+                <span> เคยได้รางวัลที่เท่าไหร่</span>
+                <input id="prize" name="prize" value="" type="text" autocomplete="on" >
+                </label>
+
+                <label class="select-pic">
+                        <span> อัพโหลดภาพผู้เเข่งขัน(ถ้ามี)</span>
+                        <button class="ui blue button">เลือกรูป</button>
+                </label>
+
+                <label class="gender">
+                        <span>  เพศ</span>
+                        <button class="circular ui icon button left attached ">
+                                ชาย
+                              </button>
+                              
+                              <button class="circular ui icon button  right attached ">
+                              หญิง
+                              </button>
+                              <span>อายุ</span>
+                              <div class="ui input" style="width: 30px;">
+                                      <input type="text" />
+                              </div>
+                              <div class="ui selection dropdown" id="dropdown-ranked">
+                                    <input type="hidden" name="Ranked">
+                                    <i class="dropdown icon"></i>
+                                    <div class="menu">
+                                      <div class="item" data-value="1"></div>
+                                    </div>
+                                  </div>
+                </label>
+                
+                
+               <!-- <button class="submit button" type="button"></button> -->
+                <center><img src="images\Kmutt web prototype2-32.png" width="40%"/></center>
+               
+                </fieldset>
+          </form>
+        </div>
+    
+    </div>
+   
+           
+
+
+          
+    </body>
+</html>
